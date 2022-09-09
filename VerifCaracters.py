@@ -5,6 +5,5 @@ def verifAlphabet(secretWord):
         if caractere.isalpha() == True and caractere not in specialCaractere:
             continue
         else :
-            print("Un/Des caractères ne sont pas valides.")
             return False
     return True
