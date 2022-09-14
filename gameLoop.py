@@ -1,5 +1,7 @@
 from VerifCaracters import verifAlphabet
 from Display import printPendu
+import os
+
 
 def gameLoop():
 
@@ -15,9 +17,11 @@ def gameLoop():
 
         secretWord = input("Proposer un mot secret:")
         verif = verifAlphabet(secretWord)
+        
         if verif == False:
             print("Un/Des caractères ne sont pas valides.")
 
+    secretWord = verif
     #Le jeu commence !
 
     listSecretWord = list(secretWord)
@@ -32,10 +36,17 @@ def gameLoop():
         if not(usesLetters) == False:
             print("Vous avez déjà utilisez ces lettres :\n{0}".format(', '.join(usesLetters)))
 
-        letter = input("Proposer une lettre ou un mot:")
+        verif = False
+        while verif == False:
+            letter = input("Proposer une lettre ou un mot:")
+            verif = verifAlphabet(secretWord)
         
-        if len(letter) == 1 and verifAlphabet(letter) == True:
-            usesLetters.append(letter)
+            if verif == False:
+                print("Un/Des caractères ne sont pas valides.")
+
+        letter = verif
+
+        usesLetters.append(letter)
         coupNum += 1
         if letter in listSecretWord:
             for a in range(len(secretWord)):
